@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Accueil</title>
 </head>
+<jsp:include page="/WEB-INF/header.jsp" />
 <body>
 	<h1>Bienvenue dans le système judiciaire</h1>
 </body>

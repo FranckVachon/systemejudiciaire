@@ -63,9 +63,9 @@ public class Login extends HttpServlet
                 //GestionBibliotheque biblioUpdate = new GestionBibliotheque(serveur, bd, userId, motDePasse);
                 //session.setAttribute("biblioUpdate", biblioUpdate);
                 //biblioInterrogation
-         
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/acceuil.jsp");
-                dispatcher.forward(request, response);
+                response.sendRedirect(request.getContextPath() + "/Acceuil");
+//                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/acceuil.jsp");
+//                dispatcher.forward(request, response);
                 session.setAttribute("etat", new Integer(JudiciaireConstantes.CONNECTE));
             }
             else
@@ -92,12 +92,11 @@ public class Login extends HttpServlet
         }
     }
 
-    // Dans les formulaires, on utilise la méthode POST
-    // donc, si le servlet est appelé avec la méthode GET
+    // Dans les formulaires, on utilise la méthode POSTdonc, si le servlet est appelé avec la méthode GET
     // on appelle POST
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         doPost(request, response);
     }
 
-} // class
+}
