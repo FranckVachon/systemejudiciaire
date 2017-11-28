@@ -5,6 +5,8 @@
 div#nav-container {
 	width: 100%;
 	display: inline-block;
+	background-color: #000;
+	border-radius: 5px;
 }
 
 ul {
@@ -22,17 +24,20 @@ ul li a {
 	display: block;
 	float: left;
 	width: 100px;
-	background-color: #6495ED;
-	color: black;
+	margin: 5px 0;
+	background-color: #111111;
+	color: white;
 	text-decoration: none;
 	text-align: center;
 	padding: 5px;
 	border: 2px solid;
+	border-radius: 5px;
 }
 
 ul li a:hover {
 	background-color: #D3D3D3;
 	border-color: #696969 #DCDCDC #DCDCDC #696969;
+	color: black;
 }
 </style>
 
