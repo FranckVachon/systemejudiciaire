@@ -1,4 +1,4 @@
-package judiciaireServlet;
+package oldBiblio;
 
 import java.util.List;
 import java.util.LinkedList;
@@ -9,6 +9,7 @@ import javax.servlet.http.*;
 
 import Bibliotheque.BiblioException;
 import Bibliotheque.GestionBibliotheque;
+import judiciaireServlet.JudiciaireConstantes;
 
 /**
  * Classe traitant la requête provenant de la page emprunt.jsp

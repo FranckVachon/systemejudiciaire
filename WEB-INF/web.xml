@@ -48,12 +48,16 @@
     <servlet-class>judiciaireServlet.Proces</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>ListePretMembre</servlet-name>
-    <servlet-class>judiciaireServlet.ListePretMembre</servlet-class>
+    <servlet-name>Avocats</servlet-name>
+    <servlet-class>judiciaireServlet.Avocats</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>Emprunt</servlet-name>
-    <servlet-class>judiciaireServlet.Emprunt</servlet-class>
+    <servlet-name>Jurys</servlet-name>
+    <servlet-class>judiciaireServlet.Jurys</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Juges</servlet-name>
+    <servlet-class>judiciaireServlet.Juges</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Login</servlet-name>
@@ -72,11 +76,15 @@
     <url-pattern>/Proces</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>ListePretMembre</servlet-name>
-    <url-pattern>/ListePretMembre</url-pattern>
+    <servlet-name>Avocats</servlet-name>
+    <url-pattern>/Avocats</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>Emprunt</servlet-name>
-    <url-pattern>/Emprunt</url-pattern>
+    <servlet-name>Jurys</servlet-name>
+    <url-pattern>/Jurys</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Juges</servlet-name>
+    <url-pattern>/Juges</url-pattern>
+  </servlet-mapping>  
 </web-app>

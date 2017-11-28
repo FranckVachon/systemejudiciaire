@@ -1,4 +1,4 @@
-package judiciaireServlet;
+package oldBiblio;
 
 import java.util.*;
 import java.sql.*;
@@ -8,6 +8,7 @@ import javax.servlet.http.*;
 
 import Bibliotheque.BiblioException;
 import Bibliotheque.GestionBibliotheque;
+import judiciaireServlet.JudiciaireConstantes;
 
 /**
  * Classe traitant la requête provenant de la page selectionMembre.jsp

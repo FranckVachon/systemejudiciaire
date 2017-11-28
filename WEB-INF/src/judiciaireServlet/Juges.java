@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class Proces extends HttpServlet {
+public class Juges extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -44,7 +44,7 @@ public class Proces extends HttpServlet {
 //					throw new BiblioException("Membre " + idMembre + " inexistant.");
 
 				// transfert de la requête à la page JSP pour affichage
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/proces.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/juges.jsp");
 				dispatcher.forward(request, response);
 				session.setAttribute("etat", new Integer(JudiciaireConstantes.MEMBRE_SELECTIONNE));
 			}

@@ -4,11 +4,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Proces</title>
+<title>Juges</title>
 </head>
 <jsp:include page="/WEB-INF/header.jsp" />
 <body>
-	<h1>Proces</h1>	
+	<h1>Juges</h1>	
 </body>
 <jsp:include page="/WEB-INF/footer.jsp" />
 </html>
