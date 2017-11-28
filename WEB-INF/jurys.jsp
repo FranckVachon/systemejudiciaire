@@ -15,12 +15,15 @@ html, body, div#main-panel {
 <body>
 	<div id="main-panel">
 		<h1>Jurys</h1>
-	</div>
+		<p>Inputs a implémenter inscrireJury 123456789 Joe Blau M 28
+		afficherJurys (sous forme de table? ouais je crois bien, une component
+		de préférence, on va utiliser ça pour le dashboard)</p>
+		<h2>Maquette</h2>
+		<img src="res/maquetteJury.png"/>
+		
 	<jsp:include page="/WEB-INF/footer.jsp" />
-	
-	Methodes a implémenter
-	inscrireJury 123456789 Joe Blau M 28
-	afficherJurys
+	</div>	
+
 </body>
 
 </html>

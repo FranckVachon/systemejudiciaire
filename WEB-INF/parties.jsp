@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Juges</title>
+<title>Parties</title>
 <style>
 html, body, div#main-panel {
 	height: 100%;
@@ -14,11 +14,11 @@ html, body, div#main-panel {
 <jsp:include page="/WEB-INF/header.jsp" />
 <body>
 	<div id="main-panel">
-		<h1>Juges</h1>
+		<h1>Parties</h1>
 		<h2>Maquette</h2>
-		<img src="res/maquetteJuge.png" />
+		<img src="res/maquetteParties.png" />
+
 		<jsp:include page="/WEB-INF/footer.jsp" />
 	</div>
-
 </body>
 </html>

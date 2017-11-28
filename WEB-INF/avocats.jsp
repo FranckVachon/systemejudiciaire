@@ -15,8 +15,11 @@ html, body, div#main-panel {
 <body>
 	<div id="main-panel">
 		<h1>Avocats</h1>
+		<h2>Maquette</h2>
+		<img src="res/maquetteAvocat.png"/>
+		<jsp:include page="/WEB-INF/footer.jsp" />
 	</div>
-	<jsp:include page="/WEB-INF/footer.jsp" />
+	
 </body>
 
 </html>

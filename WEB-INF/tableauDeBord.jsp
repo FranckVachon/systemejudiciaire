@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Juges</title>
+<title>Tableau de Bord</title>
 <style>
 html, body, div#main-panel {
 	height: 100%;
@@ -14,11 +14,18 @@ html, body, div#main-panel {
 <jsp:include page="/WEB-INF/header.jsp" />
 <body>
 	<div id="main-panel">
-		<h1>Juges</h1>
-		<h2>Maquette</h2>
-		<img src="res/maquetteJuge.png" />
-		<jsp:include page="/WEB-INF/footer.jsp" />
+		<h1>Tableau de Bord</h1>
+		<p>Ici, on va avoir tout les components afficher de chacun des contrôle qu'on veux bien afficher
+		exemple, 
+		afficherJuges
+		afficherAvocats
+		afficherJurys
+		afficherParties
+		afficherProces 1
+		afficherJurys
+		</p>
 	</div>
-
+	<jsp:include page="/WEB-INF/footer.jsp" />
 </body>
+
 </html>

@@ -15,8 +15,9 @@ html, body, div#main-panel {
 <body>
 	<div id="main-panel">
 		<h1>Proces</h1>
+		<jsp:include page="/WEB-INF/footer.jsp" />
 	</div>
-	<jsp:include page="/WEB-INF/footer.jsp" />
+
 </body>
 
 </html>

@@ -23,7 +23,7 @@ li {
 ul li a {
 	display: block;
 	float: left;
-	width: 100px;
+	width: 115px;
 	margin: 5px 0;
 	background-color: #111111;
 	color: white;
@@ -44,10 +44,12 @@ ul li a:hover {
 <div id="nav-container">
 	<ul class="list-inline">
 		<li><a href="/tp6/Acceuil">Acceuil</a></li>
+		<li><a href="/tp6/TableauDeBord">Tableau de Bord</a></li>
 		<li><a href="/tp6/Proces">Proces</a></li>
 		<li><a href="/tp6/Juges">Juges</a></li>
 		<li><a href="/tp6/Avocats">Avocats</a></li>
 		<li><a href="/tp6/Jurys">Jurys</a></li>
+		<li><a href="/tp6/Parties">Parties</a></li>
 		<li><a href="/tp6/Logout">Deconnection</a></li>
 	</ul>
 </div>

@@ -59,6 +59,14 @@
     <servlet-name>Juges</servlet-name>
     <servlet-class>judiciaireServlet.Juges</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>TableauDeBord</servlet-name>
+    <servlet-class>judiciaireServlet.TableauDeBord</servlet-class>
+  </servlet>
+   <servlet>
+    <servlet-name>Parties</servlet-name>
+    <servlet-class>judiciaireServlet.Parties</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>Login</servlet-name>
     <url-pattern>/Login</url-pattern>
@@ -87,4 +95,12 @@
     <servlet-name>Juges</servlet-name>
     <url-pattern>/Juges</url-pattern>
   </servlet-mapping>  
+    <servlet-mapping>
+    <servlet-name>Parties</servlet-name>
+    <url-pattern>/Parties</url-pattern>
+  </servlet-mapping>  
+  <servlet-mapping>
+    <servlet-name>TableauDeBord</servlet-name>
+    <url-pattern>/TableauDeBord</url-pattern>
+  </servlet-mapping>
 </web-app>
