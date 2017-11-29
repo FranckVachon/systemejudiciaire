@@ -29,13 +29,15 @@ public class GestionProces {
 	private Parties parties;
 	private Juges juges;
 	private Jurys jurys;
+	private Connexion cx;
 	
-	GestionProces(Process process, Seances seances, Parties parties, Juges juges, Jurys jurys) throws IFT287Exception {				
+	GestionProces(Process process, Seances seances, Parties parties, Juges juges, Jurys jurys, Connexion cx) throws IFT287Exception {				
 		this.process = process;
 		this.seances = seances;
 		this.parties = parties;
 		this.juges = juges;
 		this.jurys = jurys;
+		this.cx = cx;
 	}
 
 	//	— creerProces <idProces> <idJuge> <dateInitiale> <devantJury> <idPartieDefenderesse> <idPartiePoursuivante> 
@@ -52,27 +54,27 @@ public class GestionProces {
 	 * @throws SQLException
 	 * @throws IFT287Exception
 	 */
-	public void creerProces(int idProces, int idJuge, Date dateInitiale, boolean devantJury, int idPartieDefenderesse, int  idPartiePoursuivante, Connexion cx)
+	public void creerProces(int idProces, int idJuge, Date dateInitiale, boolean devantJury, int idPartieDefenderesse, int  idPartiePoursuivante)
 			throws SQLException, IFT287Exception
 	{
 		try {
 			Date now = new Date(Calendar.getInstance().getTimeInMillis());
 			if(dateInitiale.before(now)) throw new IFT287Exception("La date initiale est passée");
 			
-			Juge juge = Juges.selectOne(idJuge, cx);
+			Juge juge = juges.selectOne(idJuge);
 			if(juge == null) throw new IFT287Exception("Ce juge n'existe pas");
 			if(!juge.isActif()) throw new IFT287Exception("Ce juge n'est pas disponible");
 			
-			Partie defense = Parties.selectOne(idPartieDefenderesse, cx);
-			Partie poursuite = Parties.selectOne(idPartiePoursuivante, cx);
+			Partie defense = parties.selectOne(idPartieDefenderesse);
+			Partie poursuite = parties.selectOne(idPartiePoursuivante);
 			
 			if(defense == null) throw new IFT287Exception("Il n'y a pas de d�fenes");
 			if(poursuite == null) throw new IFT287Exception("Il n'y a pas de poursuite");
 						
 			Proces proces = new Proces(idProces, juge, dateInitiale, devantJury, defense, poursuite);
 					
-			if(Process.exist(proces, cx)) throw new IFT287Exception("Le proces existe déjà");			
-			Process.creeProces(proces, cx);		
+			if(process.exist(proces)) throw new IFT287Exception("Le proces existe déjà");			
+			process.creeProces(proces);		
 
 			cx.getConnection().commit();
 		}catch(Exception e ) {
@@ -93,18 +95,18 @@ public class GestionProces {
 	 * @throws SQLException
 	 * @throws IFT287Exception
 	 */
-	public void assignerJury(int nas, int idProces, Connexion cx)
+	public void assignerJury(int nas, int idProces)
 			throws SQLException, IFT287Exception
 	{
 		try {
-			Proces proces = Process.selectOne(idProces, cx);
+			Proces proces = process.selectOne(idProces);
 			if(proces == null) throw new IFT287Exception("Le proces n'existe pas");
 			
-			Jury jury = Jurys.selectOne(nas, cx);			
+			Jury jury = jurys.selectOne(nas);			
 	
 			if(jury == null) throw new IFT287Exception("ce jury n'existe pas");
 			if(!jury.isActif()) throw new IFT287Exception("Ce jury n'est pas disponible");
-			Jurys.assignerJury(jury, proces, cx);
+			jurys.assignerJury(jury, proces);
 			
 			cx.getConnection().commit();
 		}catch(Exception e ) {
@@ -124,18 +126,18 @@ public class GestionProces {
 	 * @throws SQLException
 	 * @throws IFT287Exception
 	 */
-	public void ajouterSeance(int idSeance, int idProces, Date dateSeance, Connexion cx)
+	public void ajouterSeance(int idSeance, int idProces, Date dateSeance)
 			throws SQLException, IFT287Exception
 	{
 		try { 
 			Date now = new Date(Calendar.getInstance().getTimeInMillis());		
 			if(dateSeance.before(now)) throw new IFT287Exception("La date est passée");
-			Proces proces = Process.selectOne(idProces, cx);
+			Proces proces = process.selectOne(idProces);
 			if(proces == null) throw new IFT287Exception("Ce proces n'existe pas");			
 			Seance seance = new Seance(idSeance, dateSeance, idProces);
 			
-			if(Seances.exist(seance, cx)) throw new IFT287Exception("Cette seance existe déjà");
-			Seances.ajouterSeance(seance, proces, cx);
+			if(seances.exist(seance)) throw new IFT287Exception("Cette seance existe déjà");
+			seances.ajouterSeance(seance, proces);
 			
 			cx.getConnection().commit();
 		}catch(Exception e ) {
@@ -153,20 +155,20 @@ public class GestionProces {
 	 * @throws SQLException
 	 * @throws IFT287Exception
 	 */
-	public void supprimerSeance(int idSeance, Connexion cx)
+	public void supprimerSeance(int idSeance)
 			throws SQLException, IFT287Exception
 	{
 		try {			
-			Seance seance = Seances.selectOne(idSeance,cx);
+			Seance seance = seances.selectOne(idSeance);
 			if(seance == null) throw new IFT287Exception("Cette séance n'exsite pas");
 			
 			Date now = new Date(Calendar.getInstance().getTimeInMillis());		
 			if(seance.getDate().before(now)) throw new IFT287Exception("La date est passée");
 				
-			Proces proces = Process.selectOne(seance.getIdProces(), cx);
+			Proces proces = process.selectOne(seance.getIdProces());
 			if(proces == null) throw new IFT287Exception("Ce proces n'existe pas et la Seance est invalide");
 			if(proces.isComplet()) throw new IFT287Exception("On ne peut retirer une séance d'un procès terminé");
-			Seances.supprimmerSeance(seance, cx);
+			seances.supprimmerSeance(seance);
 			
 			cx.getConnection().commit();
 		}catch(Exception e ) {
@@ -185,28 +187,28 @@ public class GestionProces {
 	 * @throws SQLException
 	 * @throws IFT287Exception
 	 */
-	public void terminerProces(int idProces, int decision, Connexion cx)
+	public void terminerProces(int idProces, int decision)
 			throws SQLException, IFT287Exception
 	{
 		try { 
 			if(decision != 1 && decision != 0) throw new IFT287Exception("Il s'agit d'un code de decision invalide (1 ou 0 seulement");
 			
-			Proces proces = Process.selectOne(idProces, cx);
+			Proces proces = process.selectOne(idProces);
 			if(proces == null) throw new IFT287Exception("Ce procès n'existe pas");			
 			proces.setComplet(true);
 			proces.setDecision("");
-			Process.terminerProces(proces, cx);
+			process.terminerProces(proces);
 			
 			for (Jury jury : proces.getJurys()) {
 				jury.setActif(true);
-				Jurys.updateJury(jury, proces, cx);
+				jurys.updateJury(jury, proces);
 			}
 						
 			Date now = new Date(Calendar.getInstance().getTimeInMillis());
 			
 			for (Seance seance : proces.getSeances()) {
 				if(seance.getDate().before(now)) {
-					Seances.supprimmerSeance(seance, cx);
+					seances.supprimmerSeance(seance);
 				}
 			}
 			
@@ -227,13 +229,13 @@ public class GestionProces {
 	 * @throws SQLException
 	 * @throws IFT287Exception
 	 */
-	public void afficherProces(int idProces, Connexion cx)
+	public void afficherProces(int idProces)
 			throws SQLException, IFT287Exception
 	{
 		try {
-			Proces proces = Process.selectOne(idProces, cx); 	
+			Proces proces = process.selectOne(idProces); 	
 		
-			Process.afficherProces(proces, cx);
+			process.afficherProces(proces);
 			
 		}catch(Exception e ) {
 			System.out.println(e);

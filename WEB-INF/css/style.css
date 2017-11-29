@@ -4,7 +4,14 @@ html, body, div#main-panel {
 	height: 100%;
 }
 
-<!-- Style pour les tables --> 
+div.panel {
+	border: 1px solid black;
+	padding: 10px;
+	margin: 10px;
+	width: auto;
+	display: inline-block;
+	border-radius: 5px;
+}
 
 table {
 	border-radius: 5px;
@@ -25,8 +32,18 @@ table td, table#lstJury th {
 	font-size: 18px;
 }
 
-<!-- Regles générales -->
+.btn_black {
+	background-color: black;
+	color: white;
+}
 
 div.row {
 	width: 100%;
+	padding-top: 10px;
+}
+
+div.col-xs-6 {
+	width: 50%;
+	display: inline;
+	padding: 5px;
 }

@@ -5,15 +5,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import model.Jury;
-import model.Partie;
 import model.Proces;
 import model.Seance;
 import general.Connexion;
 
 public class Seances {
 	
-	public static ArrayList<Seance> selectAll(int idProces, Connexion cx) throws SQLException {
+	private Connexion cx;
+	
+	public Seances(Connexion cx) {
+		this.cx = cx;
+	}
+
+	public ArrayList<Seance> selectAll(int idProces) throws SQLException {
 		PreparedStatement s =  cx.getConnection().prepareStatement(""
 				+ "SELECT s.id, s.date, s.id_proces "
 				+ "FROM seance AS s "			
@@ -32,7 +36,7 @@ public class Seances {
 		return seances;
 	}
 
-	public static void ajouterSeance(Seance seance, Proces proces, Connexion cx) throws SQLException {
+	public void ajouterSeance(Seance seance, Proces proces) throws SQLException {
 		PreparedStatement s =  cx.getConnection().prepareStatement("INSERT INTO seance(id, id_proces, date) VALUES(?,?,?)");
 		s.setInt(1, seance.getId());
 		s.setInt(2, proces.getId());
@@ -42,7 +46,7 @@ public class Seances {
 		
 	}
 
-	public static void supprimmerSeance(Seance seance, Connexion cx) throws SQLException {
+	public void supprimmerSeance(Seance seance) throws SQLException {
 		PreparedStatement s =  cx.getConnection().prepareStatement("DELETE FROM seance WHERE id = ?");
 		s.setInt(1, seance.getId());
 
@@ -50,7 +54,7 @@ public class Seances {
 		
 	}
 
-	public static boolean exist(Seance seance, Connexion cx) throws SQLException {
+	public boolean exist(Seance seance) throws SQLException {
 		PreparedStatement s =  cx.getConnection().prepareStatement("SELECT * FROM seance WHERE id = ?");
 		s.setInt(1, seance.getId());
 		
@@ -59,7 +63,7 @@ public class Seances {
 		return r.next();
 	}
 
-	public static Seance selectOne(int idSeance, Connexion cx) throws SQLException {		
+	public Seance selectOne(int idSeance) throws SQLException {		
 		PreparedStatement s =  cx.getConnection().prepareStatement(""
 				+ "SELECT s.id, s.date, s.id_proces "
 				+ "FROM seance AS s "				

@@ -10,9 +10,15 @@ import general.Connexion;
 
 public class Parties {
 
-	
+	private Connexion cx;
 
-	public static Partie selectOne(int id, Connexion cx) throws SQLException {
+	public Parties(Connexion cx) {
+		this.cx = cx; 
+	}
+
+
+
+	public Partie selectOne(int id) throws SQLException {
 		PreparedStatement s =  cx.getConnection().prepareStatement(""
 				+ "SELECT p.id, p.prenom, p.nom, a.id, a.prenom, a.nom, a.id_type, t.nom "
 				+ "FROM partie AS p "
@@ -33,7 +39,7 @@ public class Parties {
 
 
 	
-	public static boolean exist(Partie parti, Connexion cx) throws SQLException {
+	public boolean exist(Partie parti) throws SQLException {
 		PreparedStatement s =  cx.getConnection().prepareStatement("SELECT * FROM partie WHERE id = ?");
 		s.setInt(1, parti.getId());
 		
@@ -43,7 +49,7 @@ public class Parties {
 	}	
 	
 	
-	public static void ajouterPartie(Partie partie, Connexion cx) throws SQLException {
+	public void ajouterPartie(Partie partie) throws SQLException {
 		PreparedStatement s =  cx.getConnection().prepareStatement("INSERT INTO partie(id, prenom, nom, id_avocat) VALUES(?,?,?,?)");
 		s.setInt(1, partie.getId());
 		s.setString(2, partie.getPrenom());

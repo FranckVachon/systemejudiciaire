@@ -10,10 +10,12 @@ import general.IFT287Exception;
 
 public class GestionJuge {
 	
-	private Juges juges;	
+	private Juges juges;
+	private Connexion cx;
 	
-	GestionJuge(Juges juges){
+	GestionJuge(Juges juges, Connexion cx){
 		this.juges = juges;
+		this.cx =cx;
 	}
 	
 	//	— ajouterJuge <idJuge> <prenom> <nom> <age>
@@ -28,15 +30,15 @@ public class GestionJuge {
 	 * @throws SQLException
 	 * @throws IFT287Exception
 	 */
-	public void ajouterJuge(int idJuge, String prenom, String nom, int age, Connexion cx)
+	public void ajouterJuge(int idJuge, String prenom, String nom, int age)
 			throws SQLException, IFT287Exception
 	{
 		try {
 			Juge juge = new Juge(idJuge, prenom, nom, age, true);
 			
-			if(Juges.exist(juge, cx)) throw new IFT287Exception("Le juge est déjà existant");			
+			if(juges.exist(juge)) throw new IFT287Exception("Le juge est déjà existant");			
 			
-			Juges.ajouterJuge(juge, cx);
+			juges.ajouterJuge(juge);
 			cx.getConnection().commit();
 		}catch(Exception e ) {
 			System.out.println(e);
@@ -54,16 +56,16 @@ public class GestionJuge {
 	 * @throws SQLException
 	 * @throws IFT287Exception
 	 */
-	public void retirerJuge(int idJuge, Connexion cx)
+	public void retirerJuge(int idJuge)
 			throws SQLException, IFT287Exception
 	{
 		try {
-			Juge j = Juges.selectOne(idJuge, cx);
+			Juge j = juges.selectOne(idJuge);
 			
 			if(j == null) throw new IFT287Exception("Le juge n'existe pas");
 			if(!j.isActif()) throw new IFT287Exception("Le juge n'est deja pas disponible");
 			
-			Juges.retirerJuge(j, cx);
+			juges.retirerJuge(j);
 			cx.getConnection().commit();  
 		}catch(Exception e ) {
 			System.out.println(e);
@@ -84,7 +86,7 @@ public class GestionJuge {
 			throws SQLException, IFT287Exception
 	{
 		try {
-			Juges.afficherJuges(cx);		
+			juges.afficherJuges();		
 		}catch(Exception e ) {
 			System.out.println(e);
 			cx.rollback();

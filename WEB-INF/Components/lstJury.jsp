@@ -2,7 +2,7 @@
 <%@ page import="java.util.*,java.text.*"
 	contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
-<div>
+<div class="panel">
 	<table id="lstJury">
 		<tr>
 			<th>id</th>

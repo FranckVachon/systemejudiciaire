@@ -13,9 +13,10 @@ public class GestionPartie {
 
 	private Parties parties;
 	private Avocats avocats;
+	private Connexion cx; 
 
-	GestionPartie(Parties parties, Avocats avocats) throws IFT287Exception {
-
+	GestionPartie(Parties parties, Avocats avocats, Connexion cx) throws IFT287Exception {
+		this.cx = cx;
 		this.parties = parties;
 		this.avocats = avocats;
 	}
@@ -37,19 +38,19 @@ public class GestionPartie {
 	 * @throws SQLException
 	 * @throws IFT287Exception
 	 */
-	public void ajouterPartie(int idParti, String prenom, String nom, int idAvocat, Connexion cx)
+	public void ajouterPartie(int idParti, String prenom, String nom, int idAvocat)
 			throws SQLException, IFT287Exception {
 		try {
 
-			Avocat a = Avocats.selectOne(idAvocat, cx);
+			Avocat a = avocats.selectOne(idAvocat);
 			if (a == null)
 				throw new IFT287Exception("L'avocat en question n'existe pas");
 
 			Partie partie = new Partie(idParti, a, prenom, nom);
-			if (Parties.exist(partie, cx))
+			if (parties.exist(partie))
 				throw new IFT287Exception("Le parti en question existe déjà");
 
-			Parties.ajouterPartie(partie, cx);
+			parties.ajouterPartie(partie);
 
 			cx.getConnection().commit();
 		} catch (Exception e) {

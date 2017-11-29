@@ -16,7 +16,22 @@ import general.Connexion;
 
 public class Process {
 	
-	public static Proces selectOne(int idProces, Connexion cx) throws Exception {
+	private Juges juges;
+	private Parties parties;
+	private Seances seances;
+	private Jurys jurys; 
+	private Avocats avocats;
+	private Connexion cx;
+	
+	public Process(Connexion cx) {
+		this.juges = new Juges(cx);
+		this.parties = new Parties(cx);
+		this.seances = new Seances(cx);
+		this.jurys = new Jurys(cx);
+		this.avocats = new Avocats(cx);
+	}
+	
+	public Proces selectOne(int idProces) throws Exception {
 		PreparedStatement s =  cx.getConnection().prepareStatement(""
 				+ "SELECT p.id, p.date_debut, p.devant_jury, p.complet, p.id_poursuite, p.id_defense, p.id_decision, p.id_juge, d.nom "
 				+ "FROM proces AS p "		
@@ -27,21 +42,21 @@ public class Process {
 		ResultSet r = s.executeQuery();
 		
 		if(r.next()) {
-			Juge juge = Juges.selectOne(r.getInt(8), cx);
-			Partie poursuite = Parties.selectOne(r.getInt(5), cx);
-			Partie defense = Parties.selectOne(r.getInt(6), cx);
-			ArrayList<Seance> seances = Seances.selectAll(idProces, cx);
-			ArrayList<Jury> jurys = new ArrayList<Jury>(); 
+			Juge juge = juges.selectOne(r.getInt(8));
+			Partie poursuite = parties.selectOne(r.getInt(5));
+			Partie defense = parties.selectOne(r.getInt(6));
+			ArrayList<Seance> lstSeances = seances.selectAll(idProces);
+			ArrayList<Jury> lstJurys = new ArrayList<Jury>(); 
 			if( r.getBoolean(3))
-				jurys = Jurys.selectAllByProces(idProces, cx);
-			return new Proces(r.getInt(1),juge,poursuite, defense, r.getDate(2), seances, r.getBoolean(4), r.getBoolean(3),jurys,  r.getString(9));
+				lstJurys = jurys.selectAllByProces(idProces);
+			return new Proces(r.getInt(1),juge,poursuite, defense, r.getDate(2), lstSeances, r.getBoolean(4), r.getBoolean(3),lstJurys,  r.getString(9));
 			
 		}
 		else 
 			return null;		
 	}
 	
-	public static void creeProces(Proces proces, Connexion cx) throws SQLException {
+	public void creeProces(Proces proces) throws SQLException {
 		PreparedStatement s =  cx.getConnection().prepareStatement("INSERT INTO proces(id, id_juge, date_debut, devant_jury, id_poursuite, id_defense) VALUES(?,?,?,?,?,?)");
 		s.setInt(1, proces.getId());
 		s.setInt(2, proces.getJuge().getId());
@@ -57,7 +72,7 @@ public class Process {
 		
 	}
 
-	public static void terminerProces(Proces proces, Connexion cx) throws SQLException {
+	public void terminerProces(Proces proces) throws SQLException {
 		PreparedStatement s =  cx.getConnection().prepareStatement("UPDATE proces SET complet = ?, id_decision = ? WHERE id = ?");
 		s.setBoolean(1, true);
 		if(proces.getDecision() == "innocent")
@@ -70,7 +85,7 @@ public class Process {
 		
 	}
 
-	public static void afficherProces(Proces proces, Connexion cx) throws SQLException {
+	public void afficherProces(Proces proces) throws SQLException {
 		// JUGE QUERY AND DATE
 		PreparedStatement s = cx.getConnection().prepareStatement(
 				"SELECT juge.id AS jid, juge.prenom AS jprenom, juge.nom AS jnom, juge.age AS jage, juge.actif AS jactif, "
@@ -178,7 +193,7 @@ public class Process {
 
 	}
 
-	public static boolean exist(Proces proces, Connexion cx) throws SQLException {
+	public boolean exist(Proces proces) throws SQLException {
 		
 		PreparedStatement s =  cx.getConnection().prepareStatement("SELECT * FROM Proces WHERE id = ?");
 		s.setInt(1, proces.getId());

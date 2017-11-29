@@ -1,26 +1,18 @@
 package gestionnaireTransaction;
 
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-
 import gestionnaireTable.Jurys;
-import model.Avocat;
-import model.Juge;
 import model.Jury;
-import model.Partie;
-import model.Proces;
-import model.Seance;
 import general.Connexion;
 import general.IFT287Exception;
 
 public class GestionJury {
 	
+	private Connexion cx;
 	private Jurys jurys;
 	
-	GestionJury(Jurys jurys){
+	GestionJury(Jurys jurys, Connexion cx){
+		this.cx = cx;
 		this.jurys = jurys;
 	}
 
@@ -37,7 +29,7 @@ public class GestionJury {
 	 * @throws SQLException
 	 * @throws IFT287Exception
 	 */
-	public void inscrireJury(int nas, String prenom, String nom, char sexe, int age, Connexion cx)
+	public void inscrireJury(int nas, String prenom, String nom, char sexe, int age)
 			throws SQLException, IFT287Exception
 	{
 		try {
@@ -46,9 +38,9 @@ public class GestionJury {
 			
 			Jury jury = new Jury(nas, prenom, nom, age, true, sexe); 	
 			
-			if (Jurys.exist(jury,cx)) throw new IFT287Exception("Un jury avec ce NAS existe déjà");
+			if (jurys.exist(jury)) throw new IFT287Exception("Un jury avec ce NAS existe déjà");
 			
-			Jurys.inscrireJury(jury, cx);
+			jurys.inscrireJury(jury);
 				
 			cx.getConnection().commit();
 		}catch(Exception e ) {
@@ -67,11 +59,11 @@ public class GestionJury {
 	 * @throws SQLException
 	 * @throws IFT287Exception
 	 */    
-	public void afficherJurys(Connexion cx)
+	public void afficherJurys()
 			throws SQLException, IFT287Exception
 	{
 		try {
-			Jurys.afficherJurys(cx);			
+			jurys.afficherJurys();			
 			
 		}catch(Exception e ) {
 			System.out.println(e);

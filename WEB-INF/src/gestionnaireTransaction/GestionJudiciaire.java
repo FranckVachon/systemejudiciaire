@@ -41,11 +41,17 @@ public class GestionJudiciaire {
 	public GestionJudiciaire(String serveur, String bd, String user, String password) throws IFT287Exception, SQLException {
 		// allocation des objets pour le traitement des transactions
 		cx = new Connexion(serveur, bd, user, password);
-		gestionAvocat = new GestionAvocat(avocats);	
-		gestionJuge = new GestionJuge(juges);
-		gestionJury = new GestionJury(jurys);
-		gestionPartie = new GestionPartie(parties, avocats);
-		gestionProces = new GestionProces(process, seances, parties, juges, jurys);
+		avocats = new Avocats(cx);
+		juges = new Juges(cx);
+		jurys = new Jurys(cx);
+		parties = new Parties(cx);
+		seances = new Seances(cx);
+		process = new Process(cx);
+		gestionAvocat = new GestionAvocat(avocats, cx);	
+		gestionJuge = new GestionJuge(juges,cx);
+		gestionJury = new GestionJury(jurys, cx);
+		gestionPartie = new GestionPartie(parties, avocats, cx);
+		gestionProces = new GestionProces(process, seances, parties, juges, jurys, cx);
 	}
 
 	public void fermer() throws SQLException {

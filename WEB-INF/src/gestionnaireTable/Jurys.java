@@ -5,16 +5,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import model.Avocat;
 import model.Jury;
-import model.Partie;
 import model.Proces;
-import model.Seance;
 import general.Connexion;
 
 public class Jurys {
 
-	public static boolean exist(Jury jury, Connexion cx) throws SQLException {
+	private Connexion cx;
+
+	public Jurys(Connexion cx) {
+		this.cx = cx;
+	}
+
+	public boolean exist(Jury jury) throws SQLException {
 		PreparedStatement s =  cx.getConnection().prepareStatement("SELECT * FROM avocat WHERE id = ?");
 		s.setInt(1, jury.getNas());
 		
@@ -23,7 +26,7 @@ public class Jurys {
 		return r.next();
 	}
 	
-	public static void inscrireJury(Jury jury, Connexion cx) throws SQLException {
+	public void inscrireJury(Jury jury) throws SQLException {
 		
 		PreparedStatement s =  cx.getConnection().prepareStatement("INSERT INTO jury(nas, prenom, nom, id_sexe, age) VALUES(?,?,?,?,?)");
 		s.setInt(1, jury.getNas());
@@ -43,7 +46,7 @@ public class Jurys {
 		
 	}
 
-	public static void afficherJurys(Connexion cx) throws SQLException {
+	public void afficherJurys() throws SQLException {
 
 		PreparedStatement s =  cx.getConnection().prepareStatement(
 				"SELECT jury.nas AS jnas, jury.prenom AS jprenom, jury.nom AS jnom, "
@@ -64,7 +67,7 @@ public class Jurys {
 		
 	}
 
-	public static void assignerJury(Jury jury, Proces proces, Connexion cx) throws SQLException {
+	public void assignerJury(Jury jury, Proces proces) throws SQLException {
 		
 		PreparedStatement s =  cx.getConnection().prepareStatement("INSERT INTO proces_jury(id_proces, id_jury) VALUES(?,?)");
 		s.setInt(1, proces.getId());
@@ -80,7 +83,7 @@ public class Jurys {
 		
 	}
 
-	public static void updateJury(Jury jury, Proces proces, Connexion cx) throws SQLException {
+	public void updateJury(Jury jury, Proces proces) throws SQLException {
 		PreparedStatement s2 =  cx.getConnection().prepareStatement(
 				"UPDATE jury AS j " +
 				"SET actif = ? " +
@@ -95,7 +98,7 @@ public class Jurys {
 				
 	}
 
-	public static ArrayList<Jury> selectAllByProces(int idProces, Connexion cx) throws SQLException {
+	public ArrayList<Jury> selectAllByProces(int idProces) throws SQLException {
 		PreparedStatement s =  cx.getConnection().prepareStatement(""
 				+ "SELECT j.nas, j.prenom, j.nom, j.age, j.actif, j.id_sexe, s.nom "
 				+ "FROM jury AS j "			
@@ -114,7 +117,7 @@ public class Jurys {
 		return jurys;
 	}
 
-	public static Jury selectOne(int nas, Connexion cx) throws SQLException {
+	public Jury selectOne(int nas) throws SQLException {
 		PreparedStatement s =  cx.getConnection().prepareStatement(""
 				+ "SELECT j.nas, j.prenom, j.nom, j.age, j.actif, s.nom "
 				+ "FROM jury AS j "

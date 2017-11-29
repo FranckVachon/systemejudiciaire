@@ -10,7 +10,14 @@ import model.Avocat;
 
 public class Avocats {
 
-	public static boolean exist(Avocat avocat, Connexion cx) throws SQLException {
+	private Connexion cx;
+
+	public Avocats(Connexion cx) {
+		this.cx = cx;
+	}
+
+
+	public boolean exist(Avocat avocat) throws SQLException {
 		PreparedStatement s =  cx.getConnection().prepareStatement("SELECT * FROM avocat WHERE id = ?");
 		s.setInt(1, avocat.getId());
 		
@@ -20,7 +27,7 @@ public class Avocats {
 	}
 	
 
-	public static Avocat selectOne(int idAvocat, Connexion cx) throws SQLException {
+	public Avocat selectOne(int idAvocat) throws SQLException {
 		PreparedStatement s =  cx.getConnection().prepareStatement(""
 				+ "SELECT a.id, a.prenom, a.nom, t.nom,a.id_type "
 				+ "FROM avocat AS a "				
@@ -36,7 +43,7 @@ public class Avocats {
 			return null;
 	}
 	
-	public static int ajouterAvocat(Avocat avocat, Connexion cx) throws SQLException {
+	public int ajouterAvocat(Avocat avocat) throws SQLException {
 		PreparedStatement s =  cx.getConnection().prepareStatement("INSERT INTO avocat(id, prenom, nom, id_type) VALUES(?,?,?,?)");
 		s.setInt(1, avocat.getId());
 		s.setString(2, avocat.getPrenom());

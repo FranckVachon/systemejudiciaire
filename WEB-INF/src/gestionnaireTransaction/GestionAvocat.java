@@ -1,6 +1,5 @@
 package gestionnaireTransaction;
 
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import gestionnaireTable.Avocats;
@@ -11,12 +10,13 @@ import general.IFT287Exception;
 public  class GestionAvocat {
 		
 	private Avocats avocats;
-
+	private Connexion cx;
 	/**
 	 * Creation d'une instance
 	 */
-	public GestionAvocat(Avocats avocats) throws IFT287Exception {
+	public GestionAvocat(Avocats avocats, Connexion cx) throws IFT287Exception {
 		this.avocats = avocats;
+		this.cx = cx;
 	}
 	
 	//	— 	ajouterAvocat <idAvocat> <prenom> <nom> <type> 
@@ -31,7 +31,7 @@ public  class GestionAvocat {
 	 * @throws SQLException
 	 * @throws IFT287Exception
 	 */
-	public void ajouterAvocat(int idAvocat, String prenom, String nom, int type, Connexion cx)
+	public void ajouterAvocat(int idAvocat, String prenom, String nom, int type)
 			throws SQLException, IFT287Exception
 	{
 		try {
@@ -39,9 +39,9 @@ public  class GestionAvocat {
 						
 			Avocat avocat = new Avocat(idAvocat, prenom, nom, "", type);
 			
-			if(Avocats.exist(avocat, cx))  throw new IFT287Exception("L'avocat existe déjà");
+			if(avocats.exist(avocat))  throw new IFT287Exception("L'avocat existe déjà");
 			
-			Avocats.ajouterAvocat(avocat, cx);
+			avocats.ajouterAvocat(avocat);
 			cx.getConnection().commit();
 		}catch(Exception e ) {
 			System.out.println(e);

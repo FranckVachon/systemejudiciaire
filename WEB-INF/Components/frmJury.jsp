@@ -1,24 +1,46 @@
 <style>
+label {
+	width: 100px;
+	display: inline-block;
+}
+
+input, div.select-wrap {
+	display: inline-block;
+	width: 200px;
+}
 </style>
 
-<form action="/action_page.php">
-	<div>
+<form action="Jurys" method="get">
+	<div class="panel">
 		<div class="row">
-			<label for="id">ID</label> <input name="id" type="text" />
+			<div class="col-xs-6">
+				<label for="id">ID</label> <input name="id" type="number" />
+			</div>
 		</div>
 		<div class="row">
-			<label for="prenom">Prenom</label> <input name="prenom" type="text" />
-			<label for="nom">Nom</label> <input name="nom" type="text" /> 
-			<input type="submit" value="submit">
+			<div class="col-xs-6">
+				<label for="prenom">Prenom</label> <input name="prenom" type="text" />
+			</div>
+			<div class="col-xs-6">
+				<label for="nom">Nom</label> <input name="nom" type="text" />
+			</div>
 		</div>
 		<div class="row">
-			<label for="sexe">Sexe</label>
-			<select>
-				<option value="0">F</option>
-				<option value="1">M</option>				
-			</select>
-			<label for="age">Age</label> <input name="age" type="number" /> 
+			<div class="col-xs-6">
+				<label for="sexe">Sexe</label>
+				<div class="select-wrap">
+					<select name="sexe">
+						<option value="F" selected="selected">F</option>
+						<option value="M">M</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-xs-6">
+				<label for="age">Age</label> <input name="age" type="number" />
+			</div>
 		</div>
-		<input type="submit" value="submit">
+		<div class="row">
+			<input class="btn_black" type="submit" value="Ajouter">
+		</div>
 	</div>
 </form>

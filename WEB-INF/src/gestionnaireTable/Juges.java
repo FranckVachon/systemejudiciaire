@@ -3,14 +3,18 @@ package gestionnaireTable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-
 import model.Juge;
 import general.Connexion;
 
 public class Juges {
 	
-	public static Juge selectOne(int id, Connexion cx) throws SQLException {
+	private Connexion cx; 
+	
+	public Juges(Connexion cx) {
+		this.cx = cx;
+	}
+	
+	public Juge selectOne(int id) throws SQLException {
 		PreparedStatement s =  cx.getConnection().prepareStatement(""
 				+ "SELECT * FROM juge "								
 				+ "WHERE id = ?");
@@ -23,7 +27,7 @@ public class Juges {
 			return null;
 	}
 	
-	public static boolean exist(Juge juge, Connexion cx) throws SQLException {
+	public boolean exist(Juge juge) throws SQLException {
 		PreparedStatement s =  cx.getConnection().prepareStatement("SELECT * FROM juge WHERE id = ?");
 		s.setInt(1, juge.getId());
 		
@@ -32,7 +36,7 @@ public class Juges {
 		return r.next();
 	}
 
-	public static int ajouterJuge(Juge juge, Connexion cx) throws SQLException {
+	public int ajouterJuge(Juge juge) throws SQLException {
 		PreparedStatement s =  cx.getConnection().prepareStatement("INSERT INTO juge(id, prenom, nom, age) VALUES(?,?,?,?)");
 		
 		s.setInt(1, juge.getId());
@@ -43,7 +47,7 @@ public class Juges {
 		return s.executeUpdate();
 	}
 	
-	public static int retirerJuge(Juge juge, Connexion cx) throws SQLException {
+	public int retirerJuge(Juge juge) throws SQLException {
 		PreparedStatement s =  cx.getConnection().prepareStatement("UPDATE juge SET actif = ? WHERE id = ?");
 		s.setBoolean(1, false);
 		s.setInt(2, juge.getId());
@@ -51,7 +55,7 @@ public class Juges {
 		return s.executeUpdate();
 	}
 	
-	public static void afficherJuges(Connexion cx) throws SQLException {
+	public void afficherJuges() throws SQLException {
 		
 		PreparedStatement s =  cx.getConnection().prepareStatement("SELECT * FROM juge WHERE actif = ?");
 		s.setBoolean(1, true);		

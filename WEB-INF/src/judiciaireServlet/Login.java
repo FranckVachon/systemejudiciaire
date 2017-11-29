@@ -57,7 +57,7 @@ public class Login extends HttpServlet
                 System.out.println("Login: session id=" + session.getId());
                 GestionJudiciaire gJudiciaire = new GestionJudiciaire(serveur, bd, userId, motDePasse);                
                 gJudiciaire.getConnexion().setIsolationReadCommited();
-                session.setAttribute("gJudiciare", gJudiciaire);
+                session.setAttribute("gJudiciaire", gJudiciaire);
                 
                 // TODO Do we need this?
                 //GestionBibliotheque biblioUpdate = new GestionBibliotheque(serveur, bd, userId, motDePasse);
