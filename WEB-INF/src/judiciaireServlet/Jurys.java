@@ -28,7 +28,8 @@ public class Jurys extends HttpServlet {
 				dispatcher.forward(request, response);
 			} else {
 				session.setAttribute("etat", new Integer(JudiciaireConstantes.CONNECTE));
-
+				GestionJudiciaire gJudiciaire = (GestionJudiciaire) session.getAttribute("gJudiciaire");
+				
 				if (request.getParameter("id") != null) {
 					int id;
 					String prenom;
@@ -52,10 +53,10 @@ public class Jurys extends HttpServlet {
 						throw new IFT287Exception("Format de age incorrect");
 					}
 
-					GestionJudiciaire gJudiciaire = (GestionJudiciaire) session.getAttribute("gJudiciaire");
+					
 					gJudiciaire.getGestionJury().inscrireJury(id, prenom, nom, sexe, age);
 				}
-
+				request.setAttribute("lstJurys", gJudiciaire.getGestionJury().getJurys());
 				// try {
 				// idMembre = Integer.parseInt(idMembreParam);
 				// // enregistrer dans la session le paramètre idMembre

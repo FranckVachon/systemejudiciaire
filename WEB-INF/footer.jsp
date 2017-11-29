@@ -8,6 +8,8 @@ div#footer {
 	display: inline-block;
 	background-color: #000;
 	border-radius: 5px;
+	position: absolute;
+    bottom: 0;
 }
 
 div#footer p {

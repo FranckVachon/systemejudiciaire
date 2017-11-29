@@ -1,6 +1,8 @@
 package gestionnaireTransaction;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+
 import gestionnaireTable.Jurys;
 import model.Jury;
 import general.Connexion;
@@ -69,6 +71,10 @@ public class GestionJury {
 			System.out.println(e);
 			cx.rollback();			
 		}
+	}
+
+	public ArrayList<Jury> getJurys() throws SQLException {		
+		return jurys.getJurys();
 	}
     
 

@@ -21,10 +21,8 @@
 			<jsp:include page="/WEB-INF/Components/lstJury.jsp" />
 		</div>
 		<div>
-		<jsp:include page="/WEB-INF/Components/frmJury.jsp" />
+			<jsp:include page="/WEB-INF/Components/frmJury.jsp" />
 		</div>
-		<h2>Maquette</h2>
-		<img src="res/maquetteJury.png" />
 		<jsp:include page="/WEB-INF/footer.jsp" />
 	</div>
 

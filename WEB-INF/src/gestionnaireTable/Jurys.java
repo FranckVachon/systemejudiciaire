@@ -133,5 +133,17 @@ public class Jurys {
 			return null;
 	}
 
+	public ArrayList<Jury> getJurys() throws SQLException {
+		PreparedStatement s =  cx.getConnection().prepareStatement("SELECT * FROM jury");
+		ResultSet r = s.executeQuery();	
+		
+		ArrayList<Jury> lstJury = new ArrayList<Jury>();
+		while (r.next()) {
+			lstJury.add(new Jury(r.getInt(1), r.getString(2), r.getString(3), r.getInt(4), r.getBoolean(5), r.getString(6).charAt(0)));
+		}
+		
+		return lstJury;
+	}
+
 
 }
