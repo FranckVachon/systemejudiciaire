@@ -12,11 +12,7 @@
 <body>
 	<jsp:include page="/WEB-INF/header.jsp" />
 	<div id="main-panel">
-		<h1>Jurys</h1>
-		<p>Inputs a implémenter inscrireJury 123456789 Joe Blau M 28
-			afficherJurys (sous forme de table? ouais je crois bien, une
-			component de préférence, on va utiliser ça pour le dashboard)</p>
-
+		<h1>Jurys</h1>		
 		<div>
 			<jsp:include page="/WEB-INF/Components/lstJury.jsp" />
 		</div>

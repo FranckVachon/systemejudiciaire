@@ -47,3 +47,13 @@ div.col-xs-6 {
 	display: inline;
 	padding: 5px;
 }
+
+label {
+	width: 100px;
+	display: inline-block;
+}
+
+input, div.select-wrap {
+	display: inline-block;
+	width: 200px;
+}

@@ -9,14 +9,17 @@
 	<%@ include file="/WEB-INF/css/style.css" %>
 </style>
 </head>
-<jsp:include page="/WEB-INF/header.jsp" />
 <body>
+	<jsp:include page="/WEB-INF/header.jsp" />	
 	<div id="main-panel">
 		<h1>Juges</h1>
-		<h2>Maquette</h2>
-		<img src="res/maquetteJuge.png" />
+		<div>
+			<jsp:include page="/WEB-INF/Components/lstJuge.jsp" />
+		</div>
+		<div>
+			<jsp:include page="/WEB-INF/Components/frmJuge.jsp" />
+		</div>		
 		<jsp:include page="/WEB-INF/footer.jsp" />
 	</div>
-
 </body>
 </html>

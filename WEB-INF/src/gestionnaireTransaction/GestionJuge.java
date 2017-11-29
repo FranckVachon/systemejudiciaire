@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import gestionnaireTable.Juges;
 import model.Juge;
+import model.Jury;
 import general.Connexion;
 import general.IFT287Exception;
 
@@ -92,5 +93,9 @@ public class GestionJuge {
 			cx.rollback();
 		}
 		
+	}
+
+	public ArrayList<Juge> getJuges() throws SQLException {		
+		return juges.getJuges();
 	}
 }

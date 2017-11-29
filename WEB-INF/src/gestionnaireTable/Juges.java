@@ -3,7 +3,10 @@ package gestionnaireTable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
 import model.Juge;
+import model.Jury;
 import general.Connexion;
 
 public class Juges {
@@ -67,6 +70,18 @@ public class Juges {
 			j.print();  	       
 		} 
 		cx.getConnection().commit();	
+	}
+	
+	public ArrayList<Juge> getJuges() throws SQLException {
+		PreparedStatement s =  cx.getConnection().prepareStatement("SELECT * FROM juge");
+		ResultSet r = s.executeQuery();	
+		
+		ArrayList<Juge> lstJuge = new ArrayList<Juge>();
+		while (r.next()) {
+			lstJuge.add(new Juge(r.getInt(1), r.getString(2), r.getString(3), r.getInt(4), r.getBoolean(5)));
+		}
+		
+		return lstJuge;
 	}
 
 }

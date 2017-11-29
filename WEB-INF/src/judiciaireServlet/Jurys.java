@@ -57,19 +57,7 @@ public class Jurys extends HttpServlet {
 					gJudiciaire.getGestionJury().inscrireJury(id, prenom, nom, sexe, age);
 				}
 				request.setAttribute("lstJurys", gJudiciaire.getGestionJury().getJurys());
-				// try {
-				// idMembre = Integer.parseInt(idMembreParam);
-				// // enregistrer dans la session le paramètre idMembre
-				// // cette valeur sera utilisée dans listePretMembre.jsp
-				// session.setAttribute("idMembre", idMembreParam);
-				//
-
-				// // vérifier existence du membre
-				// GestionBibliotheque biblioInterrogation = (GestionBibliotheque) session
-				// .getAttribute("biblioInterrogation");
-				// if (!biblioInterrogation.getGestionMembre().existe(idMembre))
-				// throw new BiblioException("Membre " + idMembre + " inexistant.");
-
+				
 				// transfert de la requête à la page JSP pour affichage
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jurys.jsp");
 				dispatcher.forward(request, response);
