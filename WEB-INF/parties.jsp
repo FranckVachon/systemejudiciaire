@@ -6,9 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Parties</title>
 <style>
-html, body, div#main-panel {
-	height: 100%;
-}
+	<%@ include file="/WEB-INF/css/style.css" %>
 </style>
 </head>
 <jsp:include page="/WEB-INF/header.jsp" />
