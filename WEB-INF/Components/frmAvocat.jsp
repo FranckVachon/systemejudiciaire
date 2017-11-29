@@ -1,6 +1,8 @@
+<style>
 
+</style>
 
-<form action="Jurys" method="get">
+<form action="Avocats" method="get">
 	<div class="panel">
 		<div class="row">
 			<div class="col-xs-6">
@@ -15,18 +17,18 @@
 				<label for="nom">Nom</label> <input name="nom" type="text" />
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-xs-6">
-				<label for="sexe">Sexe</label>
-				<div class="select-wrap">
-					<select name="sexe">
-						<option value="F" selected="selected">F</option>
-						<option value="M">M</option>
-					</select>
-				</div>
-			</div>
+		<div class="row">				
 			<div class="col-xs-6">
 				<label for="age">Age</label> <input name="age" type="number" />
+			</div>
+			<div class="col-xs-6">
+				<label for="type">Type</label>
+				<div class="select-wrap">
+					<select name="type">
+						<option value="0" selected="selected">Défense</option>
+						<option value="1">Poursuite</option>
+					</select>
+				</div>
 			</div>
 		</div>
 		<div class="row">

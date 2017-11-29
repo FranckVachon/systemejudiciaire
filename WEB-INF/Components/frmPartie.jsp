@@ -1,6 +1,7 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page isELIgnored="false" %> 
 
-
-<form action="Jurys" method="get">
+<form action="Parties" method="get">
 	<div class="panel">
 		<div class="row">
 			<div class="col-xs-6">
@@ -15,18 +16,19 @@
 				<label for="nom">Nom</label> <input name="nom" type="text" />
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-xs-6">
-				<label for="sexe">Sexe</label>
-				<div class="select-wrap">
-					<select name="sexe">
-						<option value="F" selected="selected">F</option>
-						<option value="M">M</option>
-					</select>
-				</div>
-			</div>
+		<div class="row">				
 			<div class="col-xs-6">
 				<label for="age">Age</label> <input name="age" type="number" />
+			</div>
+			<div class="col-xs-6">
+				<label for="idAvocat">Avocat</label>
+				<div class="select-wrap">
+					<select name="idAvocat">
+						 <c:forEach items="${lstAvocat}" var="avocat">							
+							<option value="${avocat.id}" selected="selected">${avocat.prenom} ${avocat.nom}</option>								
+					    </c:forEach>					
+					</select>
+				</div>
 			</div>
 		</div>
 		<div class="row">

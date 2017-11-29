@@ -12,10 +12,17 @@
 <jsp:include page="/WEB-INF/header.jsp" />
 <body>
 	<div id="main-panel">
-		<h1>Parties</h1>
-		<h2>Maquette</h2>
-		<img src="res/maquetteParties.png" />
-
+		<h1>Avocats</h1>
+		<div>
+			<jsp:include page="/WEB-INF/Components/lstAvocat.jsp" />
+		</div>
+		<h1>Parties</h1>		
+		<div>
+			<jsp:include page="/WEB-INF/Components/lstPartie.jsp" />
+		</div>
+		<div>
+			<jsp:include page="/WEB-INF/Components/frmPartie.jsp" />
+		</div>
 		<jsp:include page="/WEB-INF/footer.jsp" />
 	</div>
 </body>

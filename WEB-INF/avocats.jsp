@@ -13,11 +13,13 @@
 <body>
 	<div id="main-panel">
 		<h1>Avocats</h1>
-		<h2>Maquette</h2>
-		<img src="res/maquetteAvocat.png"/>
+		<div>
+			<jsp:include page="/WEB-INF/Components/lstAvocat.jsp" />
+		</div>
+		<div>
+			<jsp:include page="/WEB-INF/Components/frmAvocat.jsp" />
+		</div>		
 		<jsp:include page="/WEB-INF/footer.jsp" />
-	</div>
-	
+	</div>	
 </body>
-
 </html>

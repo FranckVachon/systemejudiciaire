@@ -15,7 +15,6 @@ public class Partie {
 		this.nom = nom;
 	}
 	
-
 	public int getId() {
 		return id;
 	}

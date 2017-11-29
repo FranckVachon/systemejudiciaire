@@ -3,6 +3,7 @@ package gestionnaireTable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import model.Avocat;
 import model.Partie;
@@ -11,12 +12,12 @@ import general.Connexion;
 public class Parties {
 
 	private Connexion cx;
-
+	private Avocats avocats;
+	
 	public Parties(Connexion cx) {
-		this.cx = cx; 
+		this.cx = cx;
+		this.avocats = new Avocats(cx);
 	}
-
-
 
 	public Partie selectOne(int id) throws SQLException {
 		PreparedStatement s =  cx.getConnection().prepareStatement(""
@@ -58,5 +59,18 @@ public class Parties {
 
 		s.executeUpdate();
 		
+	}
+
+	public ArrayList<Partie> getParties() throws SQLException {
+		PreparedStatement s =  cx.getConnection().prepareStatement("SELECT * FROM partie");
+		ResultSet r = s.executeQuery();	
+		
+		ArrayList<Partie> lstPartie= new ArrayList<Partie>();
+		while (r.next()) {
+			Avocat avocat = avocats.selectOne(r.getInt(4));
+			lstPartie.add(new Partie(r.getInt(1), avocat, r.getString(2), r.getString(3)));
+		}
+		
+		return lstPartie;
 	}
 }

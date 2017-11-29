@@ -4,8 +4,10 @@ import java.sql.PreparedStatement;
 import general.Connexion;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import model.Avocat;
+import model.Juge;
 
 
 public class Avocats {
@@ -53,5 +55,19 @@ public class Avocats {
 		return s.executeUpdate();
 		
 	}
+
+	
+	public ArrayList<Avocat> getAvocats() throws SQLException {
+		PreparedStatement s =  cx.getConnection().prepareStatement("SELECT * FROM avocat");
+		ResultSet r = s.executeQuery();	
+		
+		ArrayList<Avocat> lstAvocat = new ArrayList<Avocat>();
+		while (r.next()) {
+			lstAvocat.add(new Avocat(r.getInt(1), r.getString(2), r.getString(3), "", r.getInt(4)));
+		}
+		
+		return lstAvocat;
+	}
+
 
 }

@@ -1,6 +1,7 @@
 package gestionnaireTransaction;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import gestionnaireTable.Avocats;
 import gestionnaireTable.Parties;
@@ -57,5 +58,9 @@ public class GestionPartie {
 			System.out.println(e);
 			cx.rollback();
 		}
+	}
+
+	public ArrayList<Partie> getParties() throws SQLException {
+		return parties.getParties(); 
 	}
 }
