@@ -23,7 +23,8 @@
 		<div>
 			<jsp:include page="/WEB-INF/Components/frmPartie.jsp" />
 		</div>
-		<jsp:include page="/WEB-INF/footer.jsp" />
+		<jsp:include page="/WEB-INF/messageErreur.jsp" />
+		<jsp:include page="/WEB-INF/footer.jsp" />		
 	</div>
 </body>
 </html>

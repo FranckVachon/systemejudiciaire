@@ -36,11 +36,11 @@ public class GestionJury {
 	{
 		try {
 			
-			if(sexe != 'M' && sexe != 'F') throw new IFT287Exception("Le sexe doit Ãªtre m ou f");
+			if(sexe != 'M' && sexe != 'F') throw new IFT287Exception("Le sexe doit être m ou f");
 			
 			Jury jury = new Jury(nas, prenom, nom, age, true, sexe); 	
 			
-			if (jurys.exist(jury)) throw new IFT287Exception("Un jury avec ce NAS existe dÃ©jÃ ");
+			if (jurys.exist(jury)) throw new IFT287Exception("Un jury avec ce NAS existe déjà ");
 			
 			jurys.inscrireJury(jury);
 				
@@ -48,6 +48,7 @@ public class GestionJury {
 		}catch(Exception e ) {
 			System.out.println(e);
 			cx.rollback();
+			throw e;
 		}
 	}
 
@@ -69,7 +70,8 @@ public class GestionJury {
 			
 		}catch(Exception e ) {
 			System.out.println(e);
-			cx.rollback();			
+			cx.rollback();
+			throw e;
 		}
 	}
 

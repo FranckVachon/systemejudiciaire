@@ -55,7 +55,7 @@ public class Proces extends HttpServlet {
 //			List<String> listeMessageErreur = new LinkedList<String>();
 //			listeMessageErreur.add(e.toString());
 //			request.setAttribute("listeMessageErreur", listeMessageErreur);
-//			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/selectionMembre.jsp");
+//			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/proces.jsp");
 //			dispatcher.forward(request, response);
 //		}
 	}

@@ -49,7 +49,7 @@ public class GestionPartie {
 
 			Partie partie = new Partie(idParti, a, prenom, nom);
 			if (parties.exist(partie))
-				throw new IFT287Exception("Le parti en question existe d√©j√†");
+				throw new IFT287Exception("Le parti en question existe dÈj‡†");
 
 			parties.ajouterPartie(partie);
 
@@ -57,6 +57,7 @@ public class GestionPartie {
 		} catch (Exception e) {
 			System.out.println(e);
 			cx.rollback();
+			throw e;
 		}
 	}
 

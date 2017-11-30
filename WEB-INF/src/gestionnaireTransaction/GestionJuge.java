@@ -37,13 +37,14 @@ public class GestionJuge {
 		try {
 			Juge juge = new Juge(idJuge, prenom, nom, age, true);
 			
-			if(juges.exist(juge)) throw new IFT287Exception("Le juge est d√©j√† existant");			
+			if(juges.exist(juge)) throw new IFT287Exception("Le juge est dÈj‡ existant");			
 			
 			juges.ajouterJuge(juge);
 			cx.getConnection().commit();
 		}catch(Exception e ) {
 			System.out.println(e);
 			cx.rollback();
+			throw e;
 		}
 		
 	}
@@ -71,6 +72,7 @@ public class GestionJuge {
 		}catch(Exception e ) {
 			System.out.println(e);
 			cx.rollback();
+			throw e;
 		}
 	}
 	
@@ -91,6 +93,7 @@ public class GestionJuge {
 		}catch(Exception e ) {
 			System.out.println(e);
 			cx.rollback();
+			throw e;
 		}
 		
 	}

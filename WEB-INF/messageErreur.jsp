@@ -5,7 +5,7 @@
   if (request.getAttribute("listeMessageErreur") != null)
     {
 %>
-    <span style="background-color: rgb(255, 0, 0);">
+    <div style="background-color: rgb(255, 0, 0);">
 <%
     ListIterator it = ((List) request.
       getAttribute("listeMessageErreur")).listIterator();
@@ -17,7 +17,7 @@
 <%
       }
 %>
-    </span>
+    </div>
 <%
     }
 %>

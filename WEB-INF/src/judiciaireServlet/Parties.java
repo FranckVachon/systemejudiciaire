@@ -29,7 +29,10 @@ public class Parties extends HttpServlet {
 			} else {
 				session.setAttribute("etat", new Integer(JudiciaireConstantes.CONNECTE));
 				GestionJudiciaire gJudiciaire = (GestionJudiciaire) session.getAttribute("gJudiciaire");
-
+				
+				request.setAttribute("lstAvocat", gJudiciaire.getGestionAvocat().getAvocats());
+				request.setAttribute("lstPartie", gJudiciaire.getGestionPartie().getParties());
+								
 				if (request.getParameter("id") != null) {
 					int id;
 					String prenom;
@@ -52,10 +55,10 @@ public class Parties extends HttpServlet {
 					}
 
 					gJudiciaire.getGestionPartie().ajouterPartie(id, prenom, nom, idAvocat);
+					request.setAttribute("lstPartie", gJudiciaire.getGestionPartie().getParties());
 				}
 
-				request.setAttribute("lstAvocat", gJudiciaire.getGestionAvocat().getAvocats());
-				request.setAttribute("lstPartie", gJudiciaire.getGestionPartie().getParties());
+				
 				
 				// transfert de la requête à la page JSP pour affichage
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/parties.jsp");
@@ -69,7 +72,7 @@ public class Parties extends HttpServlet {
 			List<String> listeMessageErreur = new LinkedList<String>();
 			listeMessageErreur.add(e.toString());
 			request.setAttribute("listeMessageErreur", listeMessageErreur);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/selectionMembre.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/parties.jsp");
 			dispatcher.forward(request, response);
 		}
 	}

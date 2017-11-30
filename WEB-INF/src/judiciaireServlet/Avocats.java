@@ -29,13 +29,14 @@ public class Avocats extends HttpServlet {
 			} else {
 				session.setAttribute("etat", new Integer(JudiciaireConstantes.CONNECTE));
 				GestionJudiciaire gJudiciaire = (GestionJudiciaire) session.getAttribute("gJudiciaire");
-
+				request.setAttribute("lstAvocat", gJudiciaire.getGestionAvocat().getAvocats());
+				
 				if (request.getParameter("id") != null) {
 					int id;
 					String prenom;
 					String nom;
 					int type;
-					String lblType;					
+							
 
 					try {
 						// Récuppère mes valeurs
@@ -46,16 +47,16 @@ public class Avocats extends HttpServlet {
 					prenom = request.getParameter("prenom");
 					nom = request.getParameter("nom");
 
+					
 					try {
 						type = Integer.parseInt(request.getParameter("type"));
 					} catch (NumberFormatException e) {
-						throw new IFT287Exception("Format de age incorrect");
+						throw new IFT287Exception("Format de type incorrect");
 					}
 
 					gJudiciaire.getGestionAvocat().ajouterAvocat(id, prenom, nom, type);
+					request.setAttribute("lstAvocat", gJudiciaire.getGestionAvocat().getAvocats());
 				}
-
-				request.setAttribute("lstAvocat", gJudiciaire.getGestionAvocat().getAvocats());
 
 				// transfert de la requête à la page JSP pour affichage
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/avocats.jsp");
@@ -69,7 +70,7 @@ public class Avocats extends HttpServlet {
 			List<String> listeMessageErreur = new LinkedList<String>();
 			listeMessageErreur.add(e.toString());
 			request.setAttribute("listeMessageErreur", listeMessageErreur);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/selectionMembre.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/avocats.jsp");
 			dispatcher.forward(request, response);
 		}
 	}

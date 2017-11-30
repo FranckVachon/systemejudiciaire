@@ -16,7 +16,7 @@ public  class GestionAvocat {
 	 * Creation d'une instance
 	 */
 	public GestionAvocat(Avocats avocats, Connexion cx) throws IFT287Exception {
-		this.avocats = avocats;
+		this.avocats = new Avocats(cx);
 		this.cx = cx;
 	}
 	
@@ -40,13 +40,14 @@ public  class GestionAvocat {
 						
 			Avocat avocat = new Avocat(idAvocat, prenom, nom, "", type);
 			
-			if(avocats.exist(avocat))  throw new IFT287Exception("L'avocat existe déjà");
+			if(avocats.exist(avocat)) throw new IFT287Exception("L'avocat existe déjà");
 			
 			avocats.ajouterAvocat(avocat);
 			cx.getConnection().commit();
-		}catch(Exception e ) {
+		}catch(Exception e ) {			
 			System.out.println(e);
 			cx.rollback();
+			throw new IFT287Exception("L'avocat existe d�j�");
 		}
 	}
 

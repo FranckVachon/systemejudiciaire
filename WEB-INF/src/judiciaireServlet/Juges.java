@@ -29,6 +29,7 @@ public class Juges extends HttpServlet {
 			} else {
 				session.setAttribute("etat", new Integer(JudiciaireConstantes.CONNECTE));
 				GestionJudiciaire gJudiciaire = (GestionJudiciaire) session.getAttribute("gJudiciaire");
+				request.setAttribute("lstJuge", gJudiciaire.getGestionJuge().getJuges());
 
 				if (request.getParameter("id") != null) {
 					int id;
@@ -48,10 +49,11 @@ public class Juges extends HttpServlet {
 					try {
 						age = Integer.parseInt(request.getParameter("age"));
 					} catch (NumberFormatException e) {
-						throw new IFT287Exception("Format de age incorrect");
+						throw new IFT287Exception("Format d'age incorrect");
 					}
 
 					gJudiciaire.getGestionJuge().ajouterJuge(id, prenom, nom, age);
+					request.setAttribute("lstJuge", gJudiciaire.getGestionJuge().getJuges());
 				}
 
 				// TODO idéalement faudrait qu'on s'assure que la valeur envoyé change pas entre les
@@ -63,9 +65,7 @@ public class Juges extends HttpServlet {
 						throw new IFT287Exception("Format de id incorrect");
 					}
 				}
-
-				request.setAttribute("lstJuge", gJudiciaire.getGestionJuge().getJuges());
-
+				
 				// transfert de la requête à la page JSP pour affichage
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/juges.jsp");
 				dispatcher.forward(request, response);
@@ -78,7 +78,7 @@ public class Juges extends HttpServlet {
 			List<String> listeMessageErreur = new LinkedList<String>();
 			listeMessageErreur.add(e.toString());
 			request.setAttribute("listeMessageErreur", listeMessageErreur);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/selectionMembre.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/juges.jsp");
 			dispatcher.forward(request, response);
 		}
 	}

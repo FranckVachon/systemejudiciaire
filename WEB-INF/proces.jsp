@@ -13,6 +13,7 @@
 <body>
 	<div id="main-panel">
 		<h1>Proces</h1>
+		<jsp:include page="/WEB-INF/messageErreur.jsp" />
 		<jsp:include page="/WEB-INF/footer.jsp" />
 	</div>
 

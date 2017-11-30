@@ -24,7 +24,7 @@ table th {
 	color: white;
 }
 
-table td, table#lstJury th {
+table td, table th {
 	border: solid 1px black;
 	border-collapse: collapse;
 	padding: 10px;

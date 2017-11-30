@@ -29,6 +29,7 @@ public class Jurys extends HttpServlet {
 			} else {
 				session.setAttribute("etat", new Integer(JudiciaireConstantes.CONNECTE));
 				GestionJudiciaire gJudiciaire = (GestionJudiciaire) session.getAttribute("gJudiciaire");
+				request.setAttribute("lstJurys", gJudiciaire.getGestionJury().getJurys());
 				
 				if (request.getParameter("id") != null) {
 					int id;
@@ -52,11 +53,11 @@ public class Jurys extends HttpServlet {
 					} catch (NumberFormatException e) {
 						throw new IFT287Exception("Format de age incorrect");
 					}
-
 					
 					gJudiciaire.getGestionJury().inscrireJury(id, prenom, nom, sexe, age);
+					request.setAttribute("lstJurys", gJudiciaire.getGestionJury().getJurys());
 				}
-				request.setAttribute("lstJurys", gJudiciaire.getGestionJury().getJurys());
+				
 				
 				// transfert de la requête à la page JSP pour affichage
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jurys.jsp");
@@ -70,7 +71,7 @@ public class Jurys extends HttpServlet {
 			List<String> listeMessageErreur = new LinkedList<String>();
 			listeMessageErreur.add(e.toString());
 			request.setAttribute("listeMessageErreur", listeMessageErreur);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/selectionMembre.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jurys.jsp");
 			dispatcher.forward(request, response);
 		}
 	}
